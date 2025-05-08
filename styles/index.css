@@ -1,0 +1,96 @@
+@import 'tailwindcss';
+@import './utility.css';
+@import './animations.css';
+
+@layer base {
+  @import './reset.css';
+}
+
+@layer components {
+  @import './components.css';
+}
+
+@layer utilities {
+  @import './utilities.css';
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --color-my-primary-50: var(--color-indigo-50);
+  --color-my-primary-100: var(--color-indigo-100);
+  --color-my-primary-200: var(--color-indigo-200);
+  --color-my-primary-300: var(--color-indigo-300);
+  --color-my-primary-400: var(--color-indigo-400);
+  --color-my-primary-500: var(--color-indigo-500);
+  --color-my-primary-600: var(--color-indigo-600);
+  --color-my-primary-700: var(--color-indigo-700);
+  --color-my-primary-800: var(--color-indigo-800);
+  --color-my-primary-900: var(--color-indigo-900);
+
+  --color-my-secondary-50: var(--color-blue-50);
+  --color-my-secondary-100: var(--color-blue-100);
+  --color-my-secondary-200: var(--color-blue-200);
+  --color-my-secondary-300: var(--color-blue-300);
+  --color-my-secondary-400: var(--color-blue-400);
+  --color-my-secondary-500: var(--color-blue-500);
+  --color-my-secondary-600: var(--color-blue-600);
+  --color-my-secondary-700: var(--color-blue-700);
+  --color-my-secondary-800: var(--color-blue-800);
+  --color-my-secondary-900: var(--color-blue-900);
+
+  --color-my-accent-50: var(--color-fuchsia-50);
+  --color-my-accent-100: var(--color-fuchsia-100);
+  --color-my-accent-200: var(--color-fuchsia-200);
+  --color-my-accent-300: var(--color-fuchsia-300);
+  --color-my-accent-400: var(--color-fuchsia-400);
+  --color-my-accent-500: var(--color-fuchsia-500);
+  --color-my-accent-600: var(--color-fuchsia-600);
+  --color-my-accent-700: var(--color-fuchsia-700);
+  --color-my-accent-800: var(--color-fuchsia-800);
+  --color-my-accent-900: var(--color-fuchsia-900);
+
+  --color-default-background: color-mix(in oklab, var(--color-zinc-700) 20%, transparent);
+  --color-default-background-hover: color-mix(in oklab, var(--color-zinc-700) 30%, transparent);
+  --color-default-background-disabled: color-mix(in oklab, var(--color-zinc-700) 10%, transparent);
+  --color-default-text: var(--color-zinc-400);
+  --color-default-text-hover: var(--color-zinc-200);
+  --color-default-text-disabled: var(--color-zinc-600);
+
+  --color-success-background: color-mix(in oklab, var(--color-green-400) 20%, transparent);
+  --color-success-background-hover: color-mix(in oklab, var(--color-green-400) 30%, transparent);
+  --color-success-background-disabled: color-mix(in oklab, var(--color-green-400) 10%, transparent);
+  --color-success-text: var(--color-green-200);
+  --color-success-text-hover: var(--color-green-100);
+  --color-success-text-disabled: color-mix(in oklab, var(--color-green-200) 20%, transparent);
+
+  --color-danger-background: color-mix(in oklab, var(--color-red-400) 20%, transparent);
+  --color-danger-background-hover: color-mix(in oklab, var(--color-red-400) 30%, transparent);
+  --color-danger-background-disabled: color-mix(in oklab, var(--color-red-400) 10%, transparent);
+  --color-danger-text: var(--color-red-200);
+  --color-danger-text-hover: var(--color-red-100);
+  --color-danger-text-disabled: color-mix(in oklab, var(--color-red-200) 20%, transparent);
+
+  --color-warning-background: color-mix(in oklab, var(--color-yellow-400) 20%, transparent);
+  --color-warning-background-hover: color-mix(in oklab, var(--color-yellow-400) 30%, transparent);
+  --color-warning-background-disabled: color-mix(in oklab, var(--color-yellow-400) 10%, transparent);
+  --color-warning-text: var(--color-yellow-200);
+  --color-warning-text-hover: var(--color-yellow-100);
+  --color-warning-text-disabled: color-mix(in oklab, var(--color-yellow-200) 20%, transparent);
+
+  --color-info-background: color-mix(in oklab, var(--color-sky-400) 20%, transparent);
+  --color-info-background-hover: color-mix(in oklab, var(--color-sky-400) 30%, transparent);
+  --color-info-background-disabled: color-mix(in oklab, var(--color-sky-400) 10%, transparent);
+  --color-info-text: var(--color-sky-200);
+  --color-info-text-hover: var(--color-sky-100);
+  --color-info-text-disabled: color-mix(in oklab, var(--color-sky-200) 20%, transparent);
+
+  --color-text: var(--color-zinc-50);
+  --color-background: var(--color-zinc-950);
+}
+
+:root {
+  --max-width: 1280px;
+  --header-height: 5rem;
+}

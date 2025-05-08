@@ -1,0 +1,20 @@
+.transition-grid {
+  transition-property: grid-template-columns, grid-template-rows;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function, cubic-bezier(0.4, 0, 0.2, 1)));
+  transition-duration: var(--tw-duration, var(--default-transition-duration, 150ms));
+}
+
+.background-pattern-dots {
+  background-image:
+    radial-gradient(var(--color-zinc-200) 2px, transparent 2px),
+    radial-gradient(var(--color-zinc-50) 1px, transparent 1px);
+  background-size: 4rem 4rem;
+  opacity: 0.2;
+  background-position:
+    0 0,
+    2rem 2rem;
+}
+
+.animate-show-up {
+  animation: showUp 1s ease-out forwards;
+}

@@ -1,0 +1,7 @@
+.text-gradient {
+  @apply from-my-accent-500 to-my-secondary-500 bg-gradient-to-r from-20% to-80% bg-clip-text text-transparent;
+}
+
+.text-gradient--inverse {
+  @apply from-my-secondary-500 to-my-accent-500 bg-gradient-to-r from-20% to-80% bg-clip-text text-transparent;
+}

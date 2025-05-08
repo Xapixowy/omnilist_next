@@ -1,0 +1,6 @@
+@utility animate-slide-left-* {
+  animation-name: slideLeft;
+  animation-duration: --value([ *]);
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
