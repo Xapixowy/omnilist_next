@@ -12,7 +12,7 @@ export default function CallToActionSection() {
     <section className='p-8'>
       <CallToAction
         title={t('readyToOrganizeYourEntertainment')}
-        description={t('joinTodayAndNeverLoseTrackOfYourMoviesShowsBooksAndGamesAgain', { app: APP_CONFIG.name })}
+        description={t('joinAppTodayAndNeverLoseTrackOfYourMoviesShowsBooksAndGamesAgain', { app: APP_CONFIG.name })}
       >
         <Link href={`${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.register}`}>
           <Button variant='primary' size='large' rounded>

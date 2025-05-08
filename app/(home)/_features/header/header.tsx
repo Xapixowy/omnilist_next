@@ -1,11 +1,11 @@
 'use client';
 
-import BrandLink from '@/components/global/brand-link';
 import MaxWidthWrapper from '@/components/layout/max-width-wrapper';
 import { cn } from '@/functions/cn';
 import { ReactNode, useEffect, useState } from 'react';
 import MobileDrawer from './components/mobile-drawer';
 import Navigation from './components/navigation';
+import NavigationBrandLink from './components/navigation-brand-link';
 import NavigationHamburger from './components/navigation-hamburger';
 import { HeaderMobileDrawerProvider } from './contexts/header-mobile-drawer';
 
@@ -33,7 +33,7 @@ export default function Header() {
         })}
       >
         <MaxWidthWrapper className='flex h-20 items-center justify-between gap-8 px-8'>
-          <BrandLink />
+          <NavigationBrandLink />
           <Navigation className='hidden sm:flex' />
           <NavigationHamburger />
         </MaxWidthWrapper>
