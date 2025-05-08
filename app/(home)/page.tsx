@@ -4,7 +4,7 @@ import CallToActionSection from './_components/page/call-to-action-section';
 import HeroSection from './_components/page/hero-section';
 import ReviewsSection from './_components/page/reviews-section';
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <MaxWidthWrapper className='flex flex-col gap-12'>
       <HeroSection />

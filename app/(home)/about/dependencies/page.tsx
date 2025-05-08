@@ -1,3 +1,3 @@
-export default function Page() {
+export default function DependenciesPage() {
   return <div>Page</div>;
 }

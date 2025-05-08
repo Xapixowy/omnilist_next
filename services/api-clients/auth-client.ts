@@ -9,6 +9,7 @@ export class AuthClient {
   private readonly account: Account;
 
   private constructor() {
+    // FIXME: Migrate to NEXT api
     this.client.setEndpoint(APP_CONFIG.appWrite.endpoint).setProject(APP_CONFIG.appWrite.projectId);
     this.account = new Account(this.client);
   }
