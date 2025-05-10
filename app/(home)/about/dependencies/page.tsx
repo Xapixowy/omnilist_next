@@ -12,10 +12,10 @@ export default function DependenciesPage() {
 
   return (
     <MaxWidthWrapper className='flex flex-col gap-8 px-8 py-20'>
-      <Heading variant='display'>{t('dependenciesAndAttributions')}</Heading>
+      <Heading variant='display'>{t('dependencies_and_attributions')}</Heading>
       <p>
         {t(
-          'appUsesSeveralExternalAPIsToProvideDataForDifferentMediaTypesWeAreGratefulToTheseServicesForMakingTheirDataAvailable',
+          'app_uses_several_external_apis_to_provide_data_for_different_media_types_we_are_grateful_to_these_services_for_making_their_data_available',
           {
             app: APP_CONFIG.name,
           },

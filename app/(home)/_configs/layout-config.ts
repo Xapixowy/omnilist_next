@@ -21,7 +21,7 @@ export const LAYOUT_CONFIG: {
       items: [
         {
           title: 'dependencies',
-          href: `${ROUTES_CONFIG.about}/${ROUTES_CONFIG.aboutRoutes.dependencies}`,
+          href: `/${ROUTES_CONFIG.about}/${ROUTES_CONFIG.aboutRoutes.dependencies}`,
         },
       ],
     },
@@ -29,21 +29,21 @@ export const LAYOUT_CONFIG: {
       title: 'lists',
       items: [
         {
-          title: 'moviesAndTvShows',
-          href: `${ROUTES_CONFIG.list}/${ROUTES_CONFIG.listRoutes.moviesAndTvShows}`,
+          title: 'movies_and_tv_shows',
+          href: `/${ROUTES_CONFIG.list}/${ROUTES_CONFIG.listRoutes.moviesAndTvShows}`,
         },
       ],
       shownIfLoggedIn: true,
     },
     {
       title: 'login',
-      href: `${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.login}`,
+      href: `/${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.login}`,
       variant: 'secondary',
       hiddenIfLoggedIn: true,
     },
     {
-      title: 'signUp',
-      href: `${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.register}`,
+      title: 'sign_up',
+      href: `/${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.register}`,
       variant: 'primary',
       hiddenIfLoggedIn: true,
     },
@@ -54,7 +54,7 @@ export const LAYOUT_CONFIG: {
       links: [
         {
           title: 'dependencies',
-          href: `${ROUTES_CONFIG.about}/${ROUTES_CONFIG.aboutRoutes.dependencies}`,
+          href: `/${ROUTES_CONFIG.about}/${ROUTES_CONFIG.aboutRoutes.dependencies}`,
         },
       ],
     },
@@ -63,11 +63,11 @@ export const LAYOUT_CONFIG: {
       links: [
         {
           title: 'login',
-          href: `${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.login}`,
+          href: `/${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.login}`,
         },
         {
-          title: 'signUp',
-          href: `${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.register}`,
+          title: 'sign_up',
+          href: `/${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.register}`,
         },
       ],
     },

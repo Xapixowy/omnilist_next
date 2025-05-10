@@ -52,13 +52,13 @@ const DiscordStatusDot = ({
 
 export default function DiscordPresenceLink({ userId, size }: DiscordPresenceLinkProps) {
   const { status } = useDiscordPresenceContext();
-  const t = useTranslations('features.discordPresence');
+  const t = useTranslations('features.discord_presence');
 
   const statusText = t(
     {
       online: 'online',
       idle: 'idle',
-      dnd: 'doNotDisturb',
+      dnd: 'do_not_disturb',
       offline: 'offline',
     }[status],
   ).toLowerCase();

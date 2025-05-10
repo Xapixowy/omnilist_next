@@ -10,7 +10,7 @@ const AdvantagesHeading = () => {
   return (
     <>
       <span className='font-bold'>{APP_CONFIG.name}</span>{' '}
-      {t('helpsYouOrganizeAndTrackAllYourEntertainmentAcrossDifferentMediums')}
+      {t('helps_you_organize_and_track_all_your_entertainment_across_different_mediums')}
     </>
   );
 };
@@ -25,7 +25,7 @@ export default function AdvantagesSection() {
   }));
 
   return (
-    <OverviewSection title={t('whatsThePoint')} heading={<AdvantagesHeading />}>
+    <OverviewSection title={t('whats_the_point')} heading={<AdvantagesHeading />}>
       <div className='mt-8 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3'>
         {translatedAdvantages.map((advantage) => (
           <Advantage key={advantage.title} className='w-full' {...advantage} />

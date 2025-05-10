@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { ReactNode } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,11 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 const Providers = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <NextIntlClientProvider>{children}</NextIntlClientProvider>
-    </>
-  );
+  return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
 };
 
 export const metadata: Metadata = {
@@ -49,6 +46,7 @@ export default function RootLayout({
     >
       <body className={cn('overflow-x-hidden min-h-screen')}>
         <Providers>{children}</Providers>
+        <Toaster />
       </body>
     </html>
   );

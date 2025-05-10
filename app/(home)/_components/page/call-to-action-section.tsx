@@ -11,17 +11,19 @@ export default function CallToActionSection() {
   return (
     <section className='p-8'>
       <CallToAction
-        title={t('readyToOrganizeYourEntertainment')}
-        description={t('joinAppTodayAndNeverLoseTrackOfYourMoviesShowsBooksAndGamesAgain', { app: APP_CONFIG.name })}
+        title={t('ready_to_organize_your_entertainment')}
+        description={t('join_app_today_and_never_lose_track_of_your_movies_shows_books_and_games_again', {
+          app: APP_CONFIG.name,
+        })}
       >
         <Link href={`${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.register}`}>
           <Button variant='primary' size='large' rounded>
-            {t('signUpNow')}
+            {t('sign_up_now')}
           </Button>
         </Link>
         <Link href={`${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.login}`}>
           <Button variant='secondary' size='large' rounded>
-            {t('logIn')}
+            {t('log_in')}
           </Button>
         </Link>
       </CallToAction>

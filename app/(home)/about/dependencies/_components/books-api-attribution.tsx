@@ -9,21 +9,21 @@ export default function BooksApiAttribution() {
     <ApiAttribution
       disabled
       title={t('books')}
-      service={t('toBeImplemented')}
+      service={t('to_be_implemented')}
       image={{
-        alt: t('apiIntegrationPending'),
+        alt: t('api_integration_pending'),
       }}
     >
       <p>
         {t(
-          'weAreCurrentlyEvaluatingDifferentBookDataProvidersToIntegrateWithAppOnceImplementedProperAttributionWillBeProvidedHere',
+          'we_are_currently_evaluating_different_book_data_providers_to_integrate_with_app_once_implemented_proper_attribution_will_be_provided_here',
           {
             app: APP_CONFIG.name,
           },
         )}
       </p>
       <p className='italic'>
-        {t('potentialAPIsUnderConsiderationIncludeProviders', {
+        {t('potential_apis_under_consideration_include_providers', {
           providers: 'Google Books API, Open Library, and Goodreads',
         })}
       </p>

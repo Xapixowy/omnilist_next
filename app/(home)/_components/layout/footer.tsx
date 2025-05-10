@@ -64,7 +64,7 @@ export default function Footer() {
             <span>&copy;</span>
             <span>{currentYear}</span>
             <Link href={ROUTES_CONFIG.default}>{APP_CONFIG.name}.</Link>
-            <span>{t('allRightsReserved')}</span>
+            <span>{t('all_rights_reserved')}</span>
           </p>
           <div>
             <DiscordPresenceLink userId={LAYOUT_CONFIG.discord.userId} size='small' />

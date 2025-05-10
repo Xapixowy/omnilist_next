@@ -13,6 +13,7 @@ export const I18N_CONFIG: IntlConfig = {
       time: {
         hour: '2-digit',
         minute: '2-digit',
+        hour12: false,
       },
       full: {
         year: 'numeric',
@@ -20,6 +21,7 @@ export const I18N_CONFIG: IntlConfig = {
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
+        hour12: false,
       },
     },
   },

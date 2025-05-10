@@ -9,7 +9,8 @@ const ReviewsHeading = () => {
 
   return (
     <>
-      {t('joinThousandsOfUsersWhoOrganizeTheirEntertainmentWith')} <span className='font-bold'>{APP_CONFIG.name}</span>.
+      {t('join_thousands_of_users_who_organize_their_entertainment_with')}{' '}
+      <span className='font-bold'>{APP_CONFIG.name}</span>.
     </>
   );
 };
@@ -19,12 +20,14 @@ export default function ReviewsSection() {
 
   const translatedReviews = PAGE_CONFIG.reviews.map((review) => ({
     ...review,
-    message: t(`reviews.${review.message}`),
+    message: t(`reviews.${review.message}`, {
+      app: APP_CONFIG.name,
+    }),
     title: t(`reviews.${review.title}`),
   }));
 
   return (
-    <OverviewSection title={t('satisfiedUsers')} heading={<ReviewsHeading />}>
+    <OverviewSection title={t('satisfied_users')} heading={<ReviewsHeading />}>
       <div className='mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
         {translatedReviews.map((review) => (
           <Review key={review.author} {...review} />

@@ -1,21 +1,21 @@
 {
-  "formValidationMessages": {
+  "form_validation_messages": {
     "required": "{field} is required",
     "email": "Please enter a valid email address",
-    "minLength": "{field} must be at least {length} characters long",
-    "maxLength": "{field} must be at most {length} characters long",
-    "passwordStrength": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+    "min_length": "{field} must be at least {length} characters long",
+    "max_length": "{field} must be at most {length} characters long",
+    "match": "{field1} must match {field2}"
   },
-  "routeTitles": {
+  "route_titles": {
     "dependencies": "Dependencies",
     "login": "Login",
     "register": "Register",
-    "verifyEmail": "Verify email",
-    "forgotPassword": "Forgot password",
-    "resetPassword": "Reset password"
+    "verify_email": "Verify email",
+    "forgot_password": "Forgot password",
+    "reset_password": "Reset password"
   },
   "features": {
-    "discordPresence": {
+    "discord_presence": {
       "online": "Online",
       "idle": "Idle",
       "doNotDisturb": "Do Not Disturb",
@@ -29,103 +29,106 @@
       "authentication": "Authentication",
       "profile": "Profile",
       "lists": "Lists",
-      "moviesAndTvShows": "Movies & TV Shows",
+      "movies_and_tv_shows": "Movies & TV Shows",
       "login": "Login",
-      "signUp": "Sign Up",
+      "sign_up": "Sign Up",
       "logout": "Logout",
-      "allRightsReserved": "All rights reserved.",
-      "somethingWentWrongPleaseTryAgain": "Something went wrong. Please try again"
+      "all_rights_reserved": "All rights reserved.",
+      "something_went_wrong_please_try_again": "Something went wrong. Please try again"
+    },
+    "auth": {
+      "abstract_background_with_color_blur": "Abstract background with color blur"
     }
   },
   "pages": {
     "landing": {
-      "trackYourEntertainmentJourney": "Track Your Entertainment Journey",
-      "keepTrackOfYourMoviesTVShowsAnimeBooksAndGamesAllInOnePlace": "Keep track of your movies, TV shows, anime, books, and games all in one place.",
-      "neverLoseTrackOfWhatYouHaveWatchedReadOrPlayedAgain": "Never lose track of what you've watched, read, or played again.",
-      "getStarted": "Get Started",
-      "abstractBackgroundWithColorBlur": "Abstract background with color blur",
-      "whatsThePoint": "What's the point?",
-      "helpsYouOrganizeAndTrackAllYourEntertainmentAcrossDifferentMediums": "helps you organize and track all your entertainment across different mediums.",
-      "satisfiedUsers": "Satisfied Users",
-      "joinThousandsOfUsersWhoOrganizeTheirEntertainmentWith": "Join thousands of users who organize their entertainment with",
-      "readyToOrganizeYourEntertainment": "Ready to organize your entertainment?",
-      "joinAppTodayAndNeverLoseTrackOfYourMoviesShowsBooksAndGamesAgain": "Join {app} today and never lose track of your movies, shows, books, and games again.",
-      "signUpNow": "Sign Up Now",
-      "logIn": "Log In",
+      "track_your_entertainment_journey": "Track Your Entertainment Journey",
+      "keep_track_of_your_movies_tv_shows_anime_books_and_games_all_in_one_place": "Keep track of your movies, TV shows, anime, books, and games all in one place.",
+      "never_lose_track_of_what_you_have_watched_read_or_played_again": "Never lose track of what you've watched, read, or played again.",
+      "get_started": "Get Started",
+      "abstract_background_with_color_blur": "Abstract background with color blur",
+      "whats_the_point": "What's the point?",
+      "helps_you_organize_and_track_all_your_entertainment_across_different_mediums": "helps you organize and track all your entertainment across different mediums.",
+      "satisfied_users": "Satisfied Users",
+      "join_thousands_of_users_who_organize_their_entertainment_with": "Join thousands of users who organize their entertainment with",
+      "ready_to_organize_your_entertainment": "Ready to organize your entertainment?",
+      "join_app_today_and_never_lose_track_of_your_movies_shows_books_and_games_again": "Join {app} today and never lose track of your movies, shows, books, and games again.",
+      "sign_up_now": "Sign Up Now",
+      "log_in": "Log In",
       "advantages": {
-        "moviesAndTVShows": "Movies & TV Shows",
-        "stayOnTopOfAllYourMoviesAndTVShowsWhatYouVeSeeWhatYouAreWatchingAndWhatIsNextOnYourList": "Stay on top of all your movies and TV shows — what you've seen, what you're watching, and what's next on your list.",
-        "animeAndManga": "Anime & Manga",
-        "organizeYourAnimeEpisodesAndMangaChaptersAcrossMultiplePlatformsWatchReadAndRememberWhereYouLeftOff": "Organize your anime episodes and manga chapters across multiple platforms. Watch, read, and remember where you left off!",
+        "movies_and_tv_shows": "Movies & TV Shows",
+        "stay_on_top_of_all_your_movies_and_tv_shows_what_you_ve_see_what_you_are_watching_and_what_is_next_on_your_list": "Stay on top of all your movies and TV shows — what you've seen, what you're watching, and what's next on your list.",
+        "anime_and_manga": "Anime & Manga",
+        "organize_your_anime_episodes_and_manga_chapters_across_multiple_platforms_watch_read_and_remember_where_you_left_off": "Organize your anime episodes and manga chapters across multiple platforms. Watch, read, and remember where you left off!",
         "books": "Books",
-        "trackYourReadingHistoryRateBooksAndKeepYourFutureReadingGoalsAllInOneTidyPlace": "Track your reading history, rate books, and keep your future reading goals all in one tidy place.",
+        "track_your_reading_history_rate_books_and_keep_your_future_reading_goals_all_in_one_tidy_place": "Track your reading history, rate books, and keep your future reading goals all in one tidy place.",
         "games": "Games",
-        "fromSinglePlayerRPGsToMultiplayerBattlesLogPlaytimeMarkProgressAndTrackYourGameLibraryLikeAPro": "From single-player RPGs to multiplayer battles — log playtime, mark progress, and track your game library like a pro."
+        "from_single_player_rpgs_to_multiplayer_battles_log_playtime_mark_progress_and_track_your_game_library_like_a_pro": "From single-player RPGs to multiplayer battles — log playtime, mark progress, and track your game library like a pro."
       },
       "reviews": {
-        "omnilistHasCompletelyChangedHowIKeepTrackOfMyShowsAndMoviesWhatYouVeSeeWhatYouAreWatchingAndWhatIsNextOnYourList": "OmniList has completely changed how I keep track of my shows and movies. I no longer forget where I left off!",
-        "movieEnthusiast": "Movie Enthusiast",
-        "asAnAvidReaderILoveBeingAbleToTrackMyBooksAlongsideMyOtherMediaTheRatingSystemIsPerfect": "As an avid reader, I love being able to track my books alongside my other media. The rating system is perfect!",
-        "bookLover": "Book Lover",
-        "finallyAFinalPlaceWhereIKnowWhereIKeptMyAnimeAndGamesTogetherTheInterfaceIsCleanAndEasyToUse": "Finally, a place where I can track my anime and games together! The interface is clean and easy to use.",
-        "gamerAndAnimeFan": "Gamer & Anime Fan"
+        "app_has_completely_changed_how_i_keep_track_of_my_shows_and_movies_what_you_ve_see_what_you_are_watching_and_what_is_next_on_your_list": "{app} has completely changed how I keep track of my shows and movies. I no longer forget where I left off!",
+        "movie_enthusiast": "Movie Enthusiast",
+        "as_an_avid_reader_i_love_being_able_to_track_my_books_alongside_my_other_media_the_rating_system_is_perfect": "As an avid reader, I love being able to track my books alongside my other media. The rating system is perfect!",
+        "book_lover": "Book Lover",
+        "finally_a_place_where_i_can_track_my_anime_and_games_together_the_interface_is_clean_and_easy_to_use": "Finally, a place where I can track my anime and games together! The interface is clean and easy to use.",
+        "gamer_and_anime_fan": "Gamer & Anime Fan"
       }
     },
     "dependencies": {
-      "dependenciesAndAttributions": "Dependencies & Attributions",
-      "appUsesSeveralExternalAPIsToProvideDataForDifferentMediaTypesWeAreGratefulToTheseServicesForMakingTheirDataAvailable": "{app} uses several external APIs to provide data for different media types. We're grateful to these services for making their data available",
-      "providerLogo": "{provider} Logo",
-      "visitProvider": "Visit {provider}",
-      "moviesAndTvShows": "Movies & TV Shows",
-      "thisProductUsesTheTMDBAPIButIsNotEndorsedOrCertifiedByTMDB": "This product uses the TMDB API but is not endorsed or certified by TMDB.",
-      "theMovieDatabaseTMDBIsACommunityBuiltMovieAndTVDatabaseEveryPieceOfDataHasBeenAddedByOurAwesomeCommunityDatingBackTo2008TMDBsInternationalFocusAndBreadthOfDataIsLargelyUnmatched": "The Movie Database (TMDB) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDB's international focus and breadth of data is largely unmatched.",
-      "apiDocumentation": "API Documentation",
-      "toBeImplemented": "To Be Implemented",
-      "apiIntegrationPending": "API integration pending",
-      "animeAndManga": "Anime & Manga",
-      "weAreCurrentlyEvaluatingDifferentAnimeAndMangaDataProvidersToIntegrateWithAppOnceImplementedProperAttributionWillBeProvidedHere": "We're currently evaluating different anime and manga data providers to integrate with {app}. Once implemented, proper attribution will be provided here.",
-      "potentialAPIsUnderConsiderationIncludeProviders": "Potential APIs under consideration include {providers}.",
+      "dependencies_and_attributions": "Dependencies & Attributions",
+      "app_uses_several_external_apis_to_provide_data_for_different_media_types_we_are_grateful_to_these_services_for_making_their_data_available": "{app} uses several external APIs to provide data for different media types. We're grateful to these services for making their data available",
+      "provider_logo": "{provider} Logo",
+      "visit_provider": "Visit {provider}",
+      "movies_and_tv_shows": "Movies & TV Shows",
+      "this_product_uses_the_tmdb_api_but_is_not_endorsed_or_certified_by_tmdb": "This product uses the TMDB API but is not endorsed or certified by TMDB.",
+      "the_movie_database_tmdb_is_a_community_built_movie_and_tv_database_every_piece_of_data_has_been_added_by_our_awesome_community_dating_back_to_2008_tmdbs_international_focus_and_breadth_of_data_is_largely_unmatched": "The Movie Database (TMDB) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDB's international focus and breadth of data is largely unmatched.",
+      "api_documentation": "API Documentation",
+      "to_be_implemented": "To Be Implemented",
+      "api_integration_pending": "API integration pending",
+      "anime_and_manga": "Anime & Manga",
+      "we_are_currently_evaluating_different_anime_and_manga_data_providers_to_integrate_with_app_once_implemented_proper_attribution_will_be_provided_here": "We're currently evaluating different anime and manga data providers to integrate with {app}. Once implemented, proper attribution will be provided here.",
+      "potential_apis_under_consideration_include_providers": "Potential APIs under consideration include {providers}.",
       "books": "Books",
-      "weAreCurrentlyEvaluatingDifferentBookDataProvidersToIntegrateWithAppOnceImplementedProperAttributionWillBeProvidedHere": "We're currently evaluating different book data providers to integrate with {app}. Once implemented, proper attribution will be provided here.",
+      "we_are_currently_evaluating_different_book_data_providers_to_integrate_with_app_once_implemented_proper_attribution_will_be_provided_here": "We're currently evaluating different book data providers to integrate with {app}. Once implemented, proper attribution will be provided here.",
       "games": "Games",
-      "weAreCurrentlyEvaluatingDifferentGameDataProvidersToIntegrateWithAppOnceImplementedProperAttributionWillBeProvidedHere": "We're currently evaluating different game data providers to integrate with {app}. Once implemented, proper attribution will be provided here."
+      "we_are_currently_evaluating_different_game_data_providers_to_integrate_with_app_once_implemented_proper_attribution_will_be_provided_here": "We're currently evaluating different game data providers to integrate with {app}. Once implemented, proper attribution will be provided here."
     },
     "register": {
-      "fillTheFormToStartTracking": "Fill the form to start tracking",
+      "fill_the_form_to_start_tracking": "Fill the form to start tracking",
       "name": "Name",
-      "emailAddress": "Email address",
+      "email_address": "Email address",
       "password": "Password",
-      "confirmPassword": "Confirm password",
-      "signUp": "Sign up",
-      "bySigningUpYouAgreeToThe": "By signing up, you agree to the",
-      "termsOfService": "Terms of Service",
+      "confirm_password": "Confirm password",
+      "sign_up": "Sign up",
+      "by_signing_up_you_agree_to_the": "By signing up, you agree to the",
+      "terms_of_service": "Terms of Service",
       "registration": "Registration",
-      "registerSuccessfullyPleaseCheckYourEmailForVerification": "Register successful! Please check your email for verification.",
-      "registerFailedPleaseTryAgain": "Register failed! Please try again.",
-      "alreadyHaveAnAccount": "Already have an account?",
-      "logIn": "Log in"
+      "register_successfully_please_check_your_email_for_verification": "Register successful! Please check your email for verification.",
+      "register_failed_please_try_again": "Register failed! Please try again.",
+      "already_have_an_account": "Already have an account?",
+      "log_in": "Log in"
     },
     "login": {
-      "enterYourCredentialsToAccessYourAccount": "Enter your credentials to access your account",
+      "enter_your_credentials_to_access_your_account": "Enter your credentials to access your account",
       "login": "Login",
-      "invalidCredentials": "Invalid credentials",
-      "youHaveSuccessfullyLoggedInToYourAccount": "You have successfully logged in to your account",
-      "forgotPassword": "Forgot password?",
-      "logIn": "Log in",
-      "emailAddress": "Email address",
+      "invalid_credentials": "Invalid credentials",
+      "you_have_successfully_logged_in_to_your_account": "You have successfully logged in to your account",
+      "forgot_password": "Forgot password?",
+      "log_in": "Log in",
+      "email_address": "Email address",
       "password": "Password",
-      "dontHaveAnAccount": "Don't have an account?",
-      "signUp": "Sign up"
+      "dont_have_an_account": "Don't have an account?",
+      "sign_up": "Sign up"
     },
-    "verifyEmail": {
-      "clickTheButtonBelowToVerifyYourAccount": "Click the button below to verify your account",
+    "verify_email": {
+      "click_the_button_below_to_verify_your_account": "Click the button below to verify your account",
       "verify": "Verify",
       "verification": "Verification",
-      "invalidLink": "Invalid link",
-      "somethingWentWrongPleaseTryAgain": "Something went wrong. Please try again",
-      "youHaveSuccessfullyVerifiedYourAccount": "You have successfully verified your account",
-      "youAreAlmostThereTapTheButtonBelowToCompleteYourVerification": "You're almost there! Tap the button below to complete your verification",
-      "yourVerificationLinkWillExpireOn": "Your verification link will expire on"
+      "invalid_link": "Invalid link",
+      "something_went_wrong_please_try_again": "Something went wrong. Please try again",
+      "you_have_successfully_verified_your_account": "You have successfully verified your account",
+      "you_are_almost_there_tap_the_button_below_to_complete_your_verification": "You're almost there! Tap the button below to complete your verification",
+      "your_verification_link_will_expire_on": "Your verification link will expire on"
     }
   }
 }
