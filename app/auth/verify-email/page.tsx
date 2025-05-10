@@ -28,7 +28,6 @@ export default function VerifyEmailPage() {
   const expire = search.get(SEARCH_PARAMS.EXPIRE);
 
   const expireDate: string | null = expire ? format.dateTime(new Date(expire), 'full') : null;
-  full;
 
   const submitHandler = async (): Promise<void> => {
     setIsSubmitting(true);
