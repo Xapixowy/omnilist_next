@@ -31,6 +31,8 @@ export default function LoginPage() {
   const submitHandler: SubmitHandler<LoginForm> = async (data: LoginForm): Promise<void> => {
     // FIXME: Migrate to NEXT api
     // const result = await authClient.login(data[LoginFormFields.EMAIL], data[LoginFormFields.PASSWORD]);
+    console.log(data);
+
     const result = {
       error: false,
       data: null,

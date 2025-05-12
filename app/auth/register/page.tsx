@@ -34,6 +34,8 @@ export default function RegisterPage() {
     //   data[RegisterFormFields.PASSWORD],
     //   data[RegisterFormFields.NAME],
     // );
+    console.log(data);
+
     const result = {
       error: false,
       data: null,

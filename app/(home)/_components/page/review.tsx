@@ -11,7 +11,7 @@ export type ReviewProps = {
   className?: string;
 };
 
-export default function Review({ title, message, author, avatar, className = '' }: ReviewProps) {
+export default function Review({ title, message, author, className = '' }: ReviewProps) {
   return (
     <div
       className={cn(
