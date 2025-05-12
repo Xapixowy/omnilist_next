@@ -1,5 +1,8 @@
+import { HttpStatusCode } from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
+import { ErrorCode } from './enums/error-code';
 import { env } from './env';
+import { BaseResponseError } from './types/api/base-response';
 
 type Middleware = (req: NextRequest, res: NextResponse) => NextResponse;
 
@@ -12,7 +15,20 @@ const withCors: Middleware = (req, res): NextResponse => {
 
   if (!isTrusted) {
     console.warn(`🚫 Blocked request from origin: ${origin} | referer: ${referer} | allowedOrigin: ${allowedOrigin}`);
-    return new NextResponse('Unauthorized request', { status: 403 });
+    return new NextResponse<BaseResponseError>(
+      JSON.stringify({
+        data: null,
+        error: {
+          code: ErrorCode.FORBIDDEN_ORIGIN,
+        },
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        status: HttpStatusCode.Forbidden,
+      },
+    );
   }
 
   if (origin === allowedOrigin) {
