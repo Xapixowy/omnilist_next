@@ -1,4 +1,4 @@
-import { APP_CONFIG } from '@/configs/app';
+import { env } from '@/env';
 import { Result, tryCatch } from '@/functions/try-catch';
 import { Account, AppwriteException, Client, ID, Models } from 'appwrite';
 
@@ -10,7 +10,7 @@ export class AuthClient {
 
   private constructor() {
     // FIXME: Migrate to NEXT api
-    this.client.setEndpoint(APP_CONFIG.appWrite.endpoint).setProject(APP_CONFIG.appWrite.projectId);
+    this.client.setEndpoint(env.APPWRITE_URL).setProject(env.APPWRITE_PROJECT_ID);
     this.account = new Account(this.client);
   }
 
@@ -37,7 +37,7 @@ export class AuthClient {
   }
 
   async verify(): Promise<Result<Models.Token, AppwriteException>> {
-    return await tryCatch<Models.Token, AppwriteException>(this.account.createVerification(APP_CONFIG.address));
+    return await tryCatch<Models.Token, AppwriteException>(this.account.createVerification(env.FRONTEND_URL));
   }
 
   async completeVerification(userId: string, secret: string): Promise<Result<Models.Token, AppwriteException>> {
