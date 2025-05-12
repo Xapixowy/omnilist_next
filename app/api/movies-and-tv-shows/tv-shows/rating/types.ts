@@ -1,11 +1,11 @@
 import { Language } from '@/enums/language';
 import { z } from 'zod';
 
-export const getMoviesRatingRequestSchema = z.object({
+export const getTVShowsRatingRequestSchema = z.object({
   session_id: z.string(),
   language: z.nativeEnum(Language).optional(),
   page: z.number().int().optional(),
   sort_by: z.enum(['created_at.asc', 'created_at.desc']).optional(),
 });
 
-export type GetMoviesRatingRequest = z.infer<typeof getMoviesRatingRequestSchema>;
+export type GetTVShowsRatingRequest = z.infer<typeof getTVShowsRatingRequestSchema>;

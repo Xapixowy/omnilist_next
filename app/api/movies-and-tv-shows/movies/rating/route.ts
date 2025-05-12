@@ -5,37 +5,48 @@ import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
 import { GetRatedMoviesResponse } from '@/types/responses/tmdb/get-rated-movies';
 import { HttpStatusCode } from 'axios';
+import { NextRequest } from 'next/server';
 import { getMoviesRatingRequestSchema } from './types';
 
-export async function GET(request: Request): Promise<Response> {
+export async function GET(request: NextRequest): Promise<Response> {
   const { searchParams } = new URL(request.url);
 
-  const parsedParams = getMoviesRatingRequestSchema.safeParse(Object.fromEntries(searchParams));
+  const data: Record<string, string | undefined> = {
+    session_id: searchParams.get('session_id') ?? undefined,
+    language: searchParams.get('language') ?? undefined,
+    page: searchParams.get('page') ?? undefined,
+    sort_by: searchParams.get('sort_by') ?? undefined,
+  };
 
-  if (!parsedParams.success) {
+  const parsedData = getMoviesRatingRequestSchema.safeParse({
+    ...data,
+    page: data.page ? parseInt(data.page) : undefined,
+  });
+
+  if (!parsedData.success) {
     return createApiResponse<ResponseError>(
       {
         code: ErrorCode.INVALID_DATA_VALIDATION,
-        context: parseZodValidationErrorsToStringArray(parsedParams.error),
+        context: parseZodValidationErrorsToStringArray(parsedData.error),
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  const { session_id, language, page, sort_by } = parsedParams.data;
+  const { session_id, language, page, sort_by } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
   const moviesRatingResponse = await tmdbClient.getRatedMovies({
     sessionId: session_id,
     language,
-    page: page ? parseInt(page) : undefined,
+    page,
     sortBy: sort_by,
   });
 
   if (!moviesRatingResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_MOVIES_RATING,
+        code: ErrorCode.CANNOT_GET_RATED_MOVIES,
       },
       HttpStatusCode.BadRequest,
     );

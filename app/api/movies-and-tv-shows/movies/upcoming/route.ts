@@ -3,6 +3,7 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
+import { GetUpcomingMoviesResponse } from '@/types/responses/tmdb/get-upcoming-movies';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
 import { getMoviesUpcomingRequestSchema } from './types';
@@ -43,11 +44,11 @@ export async function GET(request: NextRequest): Promise<Response> {
   if (!upcomingMoviesResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_UPCOMING_MOVIES,
+        code: ErrorCode.CANNOT_GET_MOVIES_UPCOMING,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<unknown>(upcomingMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<GetUpcomingMoviesResponse>(upcomingMoviesResponse, HttpStatusCode.Ok);
 }

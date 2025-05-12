@@ -6,7 +6,7 @@ export type PostMoviesRatingPathParams = {
 
 export const postMoviesRatingRequestSchema = z.object({
   session_id: z.string(),
-  id: z.number(),
+  id: z.number().int(),
   value: z.number().min(1).max(10).step(0.5),
 });
 
@@ -18,7 +18,7 @@ export type DeleteMoviesRatingPathParams = {
 
 export const deleteMoviesRatingRequestSchema = z.object({
   session_id: z.string(),
-  id: z.number(),
+  id: z.number().int(),
 });
 
 export type DeleteMoviesRatingRequest = z.infer<typeof deleteMoviesRatingRequestSchema>;

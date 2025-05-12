@@ -3,22 +3,21 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
-import { GetFavoriteMoviesResponse } from '@/types/responses/tmdb/get-favorite-movies';
+import { GetPopularTVShowsResponse } from '@/types/responses/tmdb/get-popular-tv-shows';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
-import { getMoviesFavoriteRequestSchema } from './types';
+import { getTVShowsTrendingRequestSchema } from './types';
 
 export async function GET(request: NextRequest): Promise<Response> {
   const { searchParams } = new URL(request.url);
 
   const data: Record<string, string | undefined> = {
-    session_id: searchParams.get('session_id') ?? undefined,
+    time_window: searchParams.get('time_window') ?? undefined,
     language: searchParams.get('language') ?? undefined,
     page: searchParams.get('page') ?? undefined,
-    sort_by: searchParams.get('sort_by') ?? undefined,
   };
 
-  const parsedData = getMoviesFavoriteRequestSchema.safeParse({
+  const parsedData = getTVShowsTrendingRequestSchema.safeParse({
     ...data,
     page: data.page ? parseInt(data.page) : undefined,
   });
@@ -33,24 +32,23 @@ export async function GET(request: NextRequest): Promise<Response> {
     );
   }
 
-  const { session_id, language, page, sort_by } = parsedData.data;
+  const { time_window, language, page } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const favoriteMoviesResponse = await tmdbClient.getFavoriteMovies({
-    sessionId: session_id,
+  const tvShowsTrendingResponse = await tmdbClient.getTrendingTVShows({
+    timeWindow: time_window,
     language,
     page,
-    sortBy: sort_by,
   });
 
-  if (!favoriteMoviesResponse) {
+  if (!tvShowsTrendingResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_FAVORITE_MOVIES,
+        code: ErrorCode.CANNOT_GET_TV_SHOWS_TRENDING,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<GetFavoriteMoviesResponse>(favoriteMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<GetPopularTVShowsResponse>(tvShowsTrendingResponse, HttpStatusCode.Ok);
 }

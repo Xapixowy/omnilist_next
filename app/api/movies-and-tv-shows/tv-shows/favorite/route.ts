@@ -3,10 +3,10 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
-import { GetFavoriteMoviesResponse } from '@/types/responses/tmdb/get-favorite-movies';
+import { GetFavoriteTVShowsResponse } from '@/types/responses/tmdb/get-favorite-tv-shows';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
-import { getMoviesFavoriteRequestSchema } from './types';
+import { getTVShowsFavoriteRequestSchema } from './types';
 
 export async function GET(request: NextRequest): Promise<Response> {
   const { searchParams } = new URL(request.url);
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     sort_by: searchParams.get('sort_by') ?? undefined,
   };
 
-  const parsedData = getMoviesFavoriteRequestSchema.safeParse({
+  const parsedData = getTVShowsFavoriteRequestSchema.safeParse({
     ...data,
     page: data.page ? parseInt(data.page) : undefined,
   });
@@ -36,21 +36,21 @@ export async function GET(request: NextRequest): Promise<Response> {
   const { session_id, language, page, sort_by } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const favoriteMoviesResponse = await tmdbClient.getFavoriteMovies({
+  const tvShowsFavoriteResponse = await tmdbClient.getFavoriteTVShows({
     sessionId: session_id,
     language,
     page,
     sortBy: sort_by,
   });
 
-  if (!favoriteMoviesResponse) {
+  if (!tvShowsFavoriteResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_FAVORITE_MOVIES,
+        code: ErrorCode.CANNOT_GET_FAVORITE_TV_SHOWS,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<GetFavoriteMoviesResponse>(favoriteMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<GetFavoriteTVShowsResponse>(tvShowsFavoriteResponse, HttpStatusCode.Ok);
 }

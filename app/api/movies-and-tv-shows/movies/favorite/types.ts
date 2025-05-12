@@ -4,7 +4,7 @@ import { z } from 'zod';
 export const getMoviesFavoriteRequestSchema = z.object({
   session_id: z.string(),
   language: z.nativeEnum(Language).optional(),
-  page: z.string().optional(),
+  page: z.number().int().optional(),
   sort_by: z.enum(['created_at.asc', 'created_at.desc']).optional(),
 });
 

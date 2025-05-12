@@ -4,6 +4,7 @@ import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-val
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
 import { HttpStatusCode } from 'axios';
+import { NextRequest } from 'next/server';
 import {
   DeleteMoviesWatchlistPathParams,
   deleteMoviesWatchlistRequestSchema,
@@ -12,28 +13,33 @@ import {
 } from './types';
 
 export async function POST(
-  request: Request,
+  request: NextRequest,
   { params }: { params: Promise<PostMoviesWatchlistPathParams> },
 ): Promise<Response> {
   const { id } = await params;
   const { searchParams } = new URL(request.url);
 
-  const parsedBody = postMoviesWatchlistRequestSchema.safeParse({
-    id: parseInt(id),
-    session_id: searchParams.get('session_id'),
+  const data: Record<string, string | undefined> = {
+    session_id: searchParams.get('session_id') ?? undefined,
+    id: id ?? undefined,
+  };
+
+  const parsedData = postMoviesWatchlistRequestSchema.safeParse({
+    ...data,
+    id: data.id ? parseInt(data.id) : undefined,
   });
 
-  if (!parsedBody.success) {
+  if (!parsedData.success) {
     return createApiResponse<ResponseError>(
       {
         code: ErrorCode.INVALID_DATA_VALIDATION,
-        context: parseZodValidationErrorsToStringArray(parsedBody.error),
+        context: parseZodValidationErrorsToStringArray(parsedData.error),
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  const { session_id, id: media_id } = parsedBody.data;
+  const { session_id, id: media_id } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
   const addWatchlistResponse = await tmdbClient.addToWatchlist({
@@ -56,28 +62,33 @@ export async function POST(
 }
 
 export async function DELETE(
-  request: Request,
+  request: NextRequest,
   { params }: { params: Promise<DeleteMoviesWatchlistPathParams> },
 ): Promise<Response> {
   const { id } = await params;
   const { searchParams } = new URL(request.url);
 
-  const parsedBody = deleteMoviesWatchlistRequestSchema.safeParse({
-    id: parseInt(id),
-    session_id: searchParams.get('session_id'),
+  const data: Record<string, string | undefined> = {
+    session_id: searchParams.get('session_id') ?? undefined,
+    id: id ?? undefined,
+  };
+
+  const parsedData = deleteMoviesWatchlistRequestSchema.safeParse({
+    ...data,
+    id: data.id ? parseInt(data.id) : undefined,
   });
 
-  if (!parsedBody.success) {
+  if (!parsedData.success) {
     return createApiResponse<ResponseError>(
       {
         code: ErrorCode.INVALID_DATA_VALIDATION,
-        context: parseZodValidationErrorsToStringArray(parsedBody.error),
+        context: parseZodValidationErrorsToStringArray(parsedData.error),
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  const { session_id, id: media_id } = parsedBody.data;
+  const { session_id, id: media_id } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
   const addWatchlistResponse = await tmdbClient.addToWatchlist({

@@ -3,22 +3,21 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
-import { GetFavoriteMoviesResponse } from '@/types/responses/tmdb/get-favorite-movies';
+import { GetAiringTodayTVShowsResponse } from '@/types/responses/tmdb/get-airing-today-tv-shows';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
-import { getMoviesFavoriteRequestSchema } from './types';
+import { getTVShowsAiringTodayRequestSchema } from './types';
 
 export async function GET(request: NextRequest): Promise<Response> {
   const { searchParams } = new URL(request.url);
 
   const data: Record<string, string | undefined> = {
-    session_id: searchParams.get('session_id') ?? undefined,
+    timezone: searchParams.get('timezone') ?? undefined,
     language: searchParams.get('language') ?? undefined,
     page: searchParams.get('page') ?? undefined,
-    sort_by: searchParams.get('sort_by') ?? undefined,
   };
 
-  const parsedData = getMoviesFavoriteRequestSchema.safeParse({
+  const parsedData = getTVShowsAiringTodayRequestSchema.safeParse({
     ...data,
     page: data.page ? parseInt(data.page) : undefined,
   });
@@ -33,24 +32,23 @@ export async function GET(request: NextRequest): Promise<Response> {
     );
   }
 
-  const { session_id, language, page, sort_by } = parsedData.data;
+  const { timezone, language, page } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const favoriteMoviesResponse = await tmdbClient.getFavoriteMovies({
-    sessionId: session_id,
+  const tvShowsAiringTodayResponse = await tmdbClient.getAiringTodayTVShows({
+    timezone,
     language,
     page,
-    sortBy: sort_by,
   });
 
-  if (!favoriteMoviesResponse) {
+  if (!tvShowsAiringTodayResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_FAVORITE_MOVIES,
+        code: ErrorCode.CANNOT_GET_TV_SHOWS_AIRING_TODAY,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<GetFavoriteMoviesResponse>(favoriteMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<GetAiringTodayTVShowsResponse>(tvShowsAiringTodayResponse, HttpStatusCode.Ok);
 }

@@ -6,7 +6,7 @@ export type PostMoviesWatchlistPathParams = {
 
 export const postMoviesWatchlistRequestSchema = z.object({
   session_id: z.string(),
-  id: z.number(),
+  id: z.number().int(),
 });
 
 export type PostMoviesWatchlistRequest = z.infer<typeof postMoviesWatchlistRequestSchema>;
@@ -17,7 +17,7 @@ export type DeleteMoviesWatchlistPathParams = {
 
 export const deleteMoviesWatchlistRequestSchema = z.object({
   session_id: z.string(),
-  id: z.number(),
+  id: z.number().int(),
 });
 
 export type DeleteMoviesWatchlistRequest = z.infer<typeof deleteMoviesWatchlistRequestSchema>;

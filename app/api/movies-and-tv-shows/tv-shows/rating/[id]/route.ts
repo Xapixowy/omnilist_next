@@ -7,15 +7,15 @@ import { ResponseError } from '@/types/api/base-response';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
 import {
-  DeleteMoviesRatingPathParams,
-  deleteMoviesRatingRequestSchema,
-  PostMoviesRatingPathParams,
-  postMoviesRatingRequestSchema,
+  DeleteTVShowsRatingPathParams,
+  deleteTVShowsRatingRequestSchema,
+  PostTVShowsRatingPathParams,
+  postTVShowsRatingRequestSchema,
 } from './types';
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<PostMoviesRatingPathParams> },
+  { params }: { params: Promise<PostTVShowsRatingPathParams> },
 ): Promise<Response> {
   const { id } = await params;
   const { searchParams } = new URL(request.url);
@@ -36,7 +36,7 @@ export async function POST(
     value: body.data.value ?? undefined,
   };
 
-  const parsedData = postMoviesRatingRequestSchema.safeParse({
+  const parsedData = postTVShowsRatingRequestSchema.safeParse({
     ...data,
     id: data.id ? parseInt(data.id) : undefined,
     value: data.value ? parseFloat(data.value) : undefined,
@@ -55,16 +55,16 @@ export async function POST(
   const { session_id, id: media_id, value } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const addMovieRatingResponse = await tmdbClient.addMovieRating({
+  const addTVShowRatingResponse = await tmdbClient.addTVShowRating({
     sessionId: session_id,
-    movieId: media_id,
+    tvShowId: media_id,
     rating: value,
   });
 
-  if (!addMovieRatingResponse) {
+  if (!addTVShowRatingResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_ADD_MOVIE_RATING,
+        code: ErrorCode.CANNOT_ADD_TV_SHOW_RATING,
       },
       HttpStatusCode.BadRequest,
     );
@@ -75,7 +75,7 @@ export async function POST(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<DeleteMoviesRatingPathParams> },
+  { params }: { params: Promise<DeleteTVShowsRatingPathParams> },
 ): Promise<Response> {
   const { id } = await params;
   const { searchParams } = new URL(request.url);
@@ -85,7 +85,7 @@ export async function DELETE(
     id: id ?? undefined,
   };
 
-  const parsedData = deleteMoviesRatingRequestSchema.safeParse({
+  const parsedData = deleteTVShowsRatingRequestSchema.safeParse({
     ...data,
     id: data.id ? parseInt(data.id) : undefined,
   });
@@ -103,15 +103,15 @@ export async function DELETE(
   const { session_id, id: media_id } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const deleteMovieRatingResponse = await tmdbClient.deleteMovieRating({
+  const deleteTVShowRatingResponse = await tmdbClient.deleteTVShowRating({
     sessionId: session_id,
-    movieId: media_id,
+    tvShowId: media_id,
   });
 
-  if (!deleteMovieRatingResponse) {
+  if (!deleteTVShowRatingResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_DELETE_MOVIE_RATING,
+        code: ErrorCode.CANNOT_DELETE_TV_SHOW_RATING,
       },
       HttpStatusCode.BadRequest,
     );

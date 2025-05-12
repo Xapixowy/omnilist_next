@@ -3,6 +3,7 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
+import { GetPopularMoviesResponse } from '@/types/responses/tmdb/get-popular-movies';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
 import { getMoviesPopularRequestSchema } from './types';
@@ -43,11 +44,11 @@ export async function GET(request: NextRequest): Promise<Response> {
   if (!popularMoviesResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_POPULAR_MOVIES,
+        code: ErrorCode.CANNOT_GET_MOVIES_POPULAR,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<unknown>(popularMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<GetPopularMoviesResponse>(popularMoviesResponse, HttpStatusCode.Ok);
 }

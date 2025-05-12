@@ -3,6 +3,7 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
+import { SearchMovieResponse } from '@/types/responses/tmdb/search-movie';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
 import { getMoviesSearchRequestSchema } from './types';
@@ -58,5 +59,5 @@ export async function GET(request: NextRequest): Promise<Response> {
     );
   }
 
-  return createApiResponse<unknown>(moviesSearchResponse, HttpStatusCode.Ok);
+  return createApiResponse<SearchMovieResponse>(moviesSearchResponse, HttpStatusCode.Ok);
 }

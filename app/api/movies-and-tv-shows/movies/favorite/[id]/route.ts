@@ -19,22 +19,27 @@ export async function POST(
   const { id } = await params;
   const { searchParams } = new URL(request.url);
 
-  const parsedBody = postMoviesFavoriteRequestSchema.safeParse({
-    id: parseInt(id),
-    session_id: searchParams.get('session_id'),
+  const data: Record<string, string | undefined> = {
+    session_id: searchParams.get('session_id') ?? undefined,
+    id: id ?? undefined,
+  };
+
+  const parsedData = postMoviesFavoriteRequestSchema.safeParse({
+    ...data,
+    id: data.id ? parseInt(data.id) : undefined,
   });
 
-  if (!parsedBody.success) {
+  if (!parsedData.success) {
     return createApiResponse<ResponseError>(
       {
         code: ErrorCode.INVALID_DATA_VALIDATION,
-        context: parseZodValidationErrorsToStringArray(parsedBody.error),
+        context: parseZodValidationErrorsToStringArray(parsedData.error),
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  const { session_id, id: media_id } = parsedBody.data;
+  const { session_id, id: media_id } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
   const addFavoriteResponse = await tmdbClient.addFavorite({
@@ -63,22 +68,27 @@ export async function DELETE(
   const { id } = await params;
   const { searchParams } = new URL(request.url);
 
-  const parsedBody = deleteMoviesFavoriteRequestSchema.safeParse({
-    id: parseInt(id),
-    session_id: searchParams.get('session_id'),
+  const data: Record<string, string | undefined> = {
+    session_id: searchParams.get('session_id') ?? undefined,
+    id: id ?? undefined,
+  };
+
+  const parsedData = deleteMoviesFavoriteRequestSchema.safeParse({
+    ...data,
+    id: data.id ? parseInt(data.id) : undefined,
   });
 
-  if (!parsedBody.success) {
+  if (!parsedData.success) {
     return createApiResponse<ResponseError>(
       {
         code: ErrorCode.INVALID_DATA_VALIDATION,
-        context: parseZodValidationErrorsToStringArray(parsedBody.error),
+        context: parseZodValidationErrorsToStringArray(parsedData.error),
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  const { session_id, id: media_id } = parsedBody.data;
+  const { session_id, id: media_id } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
   const addFavoriteResponse = await tmdbClient.addFavorite({

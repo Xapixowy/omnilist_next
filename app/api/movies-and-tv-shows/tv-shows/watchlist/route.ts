@@ -3,10 +3,10 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
-import { GetFavoriteMoviesResponse } from '@/types/responses/tmdb/get-favorite-movies';
+import { GetTVShowsWatchlistResponse } from '@/types/responses/tmdb/get-tv-shows-watchlist';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
-import { getMoviesFavoriteRequestSchema } from './types';
+import { getTVShowsWatchlistRequestSchema } from './types';
 
 export async function GET(request: NextRequest): Promise<Response> {
   const { searchParams } = new URL(request.url);
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest): Promise<Response> {
     sort_by: searchParams.get('sort_by') ?? undefined,
   };
 
-  const parsedData = getMoviesFavoriteRequestSchema.safeParse({
+  const parsedData = getTVShowsWatchlistRequestSchema.safeParse({
     ...data,
     page: data.page ? parseInt(data.page) : undefined,
   });
@@ -36,21 +36,21 @@ export async function GET(request: NextRequest): Promise<Response> {
   const { session_id, language, page, sort_by } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const favoriteMoviesResponse = await tmdbClient.getFavoriteMovies({
+  const tvShowsWatchlistResponse = await tmdbClient.getTVShowsWatchlist({
     sessionId: session_id,
     language,
     page,
     sortBy: sort_by,
   });
 
-  if (!favoriteMoviesResponse) {
+  if (!tvShowsWatchlistResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_FAVORITE_MOVIES,
+        code: ErrorCode.CANNOT_GET_TV_SHOWS_WATCHLIST,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<GetFavoriteMoviesResponse>(favoriteMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<GetTVShowsWatchlistResponse>(tvShowsWatchlistResponse, HttpStatusCode.Ok);
 }

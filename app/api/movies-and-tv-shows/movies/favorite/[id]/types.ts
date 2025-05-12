@@ -6,7 +6,7 @@ export type PostMoviesFavoritePathParams = {
 
 export const postMoviesFavoriteRequestSchema = z.object({
   session_id: z.string(),
-  id: z.number(),
+  id: z.number().int(),
 });
 
 export type PostMoviesFavoriteRequest = z.infer<typeof postMoviesFavoriteRequestSchema>;
@@ -17,7 +17,7 @@ export type DeleteMoviesFavoritePathParams = {
 
 export const deleteMoviesFavoriteRequestSchema = z.object({
   session_id: z.string(),
-  id: z.number(),
+  id: z.number().int(),
 });
 
 export type DeleteMoviesFavoriteRequest = z.infer<typeof deleteMoviesFavoriteRequestSchema>;
