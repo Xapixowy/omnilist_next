@@ -294,7 +294,7 @@ export class TmdbClient {
     page = 1,
   }: {
     query: string;
-    primaryReleaseYear?: number;
+    primaryReleaseYear?: string;
     region?: string;
     year?: string;
     includeAdult?: boolean;

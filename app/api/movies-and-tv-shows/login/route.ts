@@ -5,9 +5,10 @@ import { tryCatch } from '@/functions/try-catch';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
 import { HttpStatusCode } from 'axios';
+import { NextRequest } from 'next/server';
 import { PostLoginRequest, postLoginRequestSchema, PostLoginResponse } from './types';
 
-export async function POST(request: Request): Promise<Response> {
+export async function POST(request: NextRequest): Promise<Response> {
   const body = await tryCatch<PostLoginRequest>(request.json());
 
   if (body.error) {

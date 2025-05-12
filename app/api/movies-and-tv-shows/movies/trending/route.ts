@@ -3,44 +3,51 @@ import { createApiResponse } from '@/functions/create-api-response';
 import { parseZodValidationErrorsToStringArray } from '@/functions/parse-zod-validation-errors';
 import { TmdbClient } from '@/services/api-clients/tmdb-client';
 import { ResponseError } from '@/types/api/base-response';
-import { GetFavoriteMoviesResponse } from '@/types/responses/tmdb/get-favorite-movies';
 import { HttpStatusCode } from 'axios';
 import { NextRequest } from 'next/server';
-import { getMoviesFavoriteRequestSchema } from './types';
+import { getMoviesTrendingRequestSchema } from './types';
 
 export async function GET(request: NextRequest): Promise<Response> {
   const { searchParams } = new URL(request.url);
 
-  const parsedParams = getMoviesFavoriteRequestSchema.safeParse(Object.fromEntries(searchParams));
+  const data: Record<string, string | undefined> = {
+    time_window: searchParams.get('time_window') ?? undefined,
+    language: searchParams.get('language') ?? undefined,
+    page: searchParams.get('page') ?? undefined,
+  };
 
-  if (!parsedParams.success) {
+  const parsedData = getMoviesTrendingRequestSchema.safeParse({
+    ...data,
+    page: data.page ? parseInt(data.page) : undefined,
+  });
+
+  if (!parsedData.success) {
     return createApiResponse<ResponseError>(
       {
         code: ErrorCode.INVALID_DATA_VALIDATION,
-        context: parseZodValidationErrorsToStringArray(parsedParams.error),
+        context: parseZodValidationErrorsToStringArray(parsedData.error),
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  const { session_id, language, page, sort_by } = parsedParams.data;
+  const { time_window, language, page } = parsedData.data;
   const tmdbClient = TmdbClient.getInstance();
 
-  const favoriteMoviesResponse = await tmdbClient.getFavoriteMovies({
-    sessionId: session_id,
+  const trendingMoviesResponse = await tmdbClient.getTrendingMovies({
+    timeWindow: time_window,
     language,
-    page: page ? parseInt(page) : undefined,
-    sortBy: sort_by,
+    page,
   });
 
-  if (!favoriteMoviesResponse) {
+  if (!trendingMoviesResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.CANNOT_GET_FAVORITE_MOVIES,
+        code: ErrorCode.CANNOT_GET_TRENDING_MOVIES,
       },
       HttpStatusCode.BadRequest,
     );
   }
 
-  return createApiResponse<GetFavoriteMoviesResponse>(favoriteMoviesResponse, HttpStatusCode.Ok);
+  return createApiResponse<unknown>(trendingMoviesResponse, HttpStatusCode.Ok);
 }
