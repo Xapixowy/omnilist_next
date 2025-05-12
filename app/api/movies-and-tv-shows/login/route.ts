@@ -13,7 +13,7 @@ export async function POST(request: Request): Promise<Response> {
   if (body.error) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.SOMETHING_WENT_WRONG,
+        code: ErrorCode.CANNOT_PARSE_REQUEST_BODY,
       },
       HttpStatusCode.BadRequest,
     );
@@ -37,7 +37,7 @@ export async function POST(request: Request): Promise<Response> {
   if (!createRequestTokenResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.SOMETHING_WENT_WRONG,
+        code: ErrorCode.CANNOT_CREATE_REQUEST_TOKEN,
       },
       HttpStatusCode.BadRequest,
     );
@@ -54,7 +54,7 @@ export async function POST(request: Request): Promise<Response> {
   if (!createSessionWithLoginResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.SOMETHING_WENT_WRONG,
+        code: ErrorCode.CANNOT_CREATE_SESSION_WITH_LOGIN,
       },
       HttpStatusCode.BadRequest,
     );
@@ -67,7 +67,7 @@ export async function POST(request: Request): Promise<Response> {
   if (!createSessionResponse) {
     return createApiResponse<ResponseError>(
       {
-        code: ErrorCode.SOMETHING_WENT_WRONG,
+        code: ErrorCode.CANNOT_CREATE_SESSION,
       },
       HttpStatusCode.BadRequest,
     );
@@ -76,7 +76,6 @@ export async function POST(request: Request): Promise<Response> {
   return createApiResponse<PostLoginResponse>(
     {
       session_id: createSessionResponse.session_id,
-      user: 'DUPA',
     },
     HttpStatusCode.Ok,
   );

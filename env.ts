@@ -4,6 +4,7 @@ const envSchema = z.object({
   APPWRITE_URL: z.string(),
   APPWRITE_PROJECT_ID: z.string(),
   TMDB_API_KEY: z.string(),
+  TMDB_API_ACCOUNT_ID: z.string(),
   FRONTEND_URL: z.string(),
 });
 

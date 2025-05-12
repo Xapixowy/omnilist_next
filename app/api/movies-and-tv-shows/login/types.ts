@@ -9,5 +9,4 @@ export type PostLoginRequest = z.infer<typeof postLoginRequestSchema>;
 
 export type PostLoginResponse = {
   session_id: string;
-  user: unknown;
 };

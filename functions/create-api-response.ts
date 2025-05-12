@@ -18,6 +18,17 @@ export const createApiResponse = <T>(data: T, statusCode: HttpStatusCode, option
     });
   }
 
+  if (statusCode === HttpStatusCode.NoContent) {
+    return new Response(null, {
+      ...options,
+      status: statusCode,
+      headers: {
+        ...options?.headers,
+        'Content-Type': 'application/json',
+      },
+    });
+  }
+
   const response: BaseResponseSuccess<T> = {
     data,
     error: null,
