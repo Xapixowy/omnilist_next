@@ -6,7 +6,7 @@ import { ROUTES_CONFIG } from '@/configs/routes';
 import { ToastService } from '@/services/toast-service';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 import Card from '../_components/card';
 import Header from '../_components/header';
 
@@ -59,21 +59,23 @@ export default function VerifyEmailPage() {
   };
 
   return (
-    <>
-      <Header title={t('click_the_button_below_to_verify_your_account')} />
-      <Card className='grid place-items-center'>
-        <div className='flex h-full w-full flex-col place-content-center gap-4 text-center text-sm text-zinc-400'>
-          <p>{t('you_are_almost_there_tap_the_button_below_to_complete_your_verification')}</p>
-          <p className='text-zinc-50'>
-            {t('your_verification_link_will_expire_on')} <Link variant='primary'>{expireDate}</Link>
-          </p>
-          <div className='flex justify-center'>
-            <Button variant='primary' loading={isSubmitting} onClick={submitHandler}>
-              {t('verify')}
-            </Button>
+    <Suspense fallback={<div>Loading...</div>}>
+      <>
+        <Header title={t('click_the_button_below_to_verify_your_account')} />
+        <Card className='grid place-items-center'>
+          <div className='flex h-full w-full flex-col place-content-center gap-4 text-center text-sm text-zinc-400'>
+            <p>{t('you_are_almost_there_tap_the_button_below_to_complete_your_verification')}</p>
+            <p className='text-zinc-50'>
+              {t('your_verification_link_will_expire_on')} <Link variant='primary'>{expireDate}</Link>
+            </p>
+            <div className='flex justify-center'>
+              <Button variant='primary' loading={isSubmitting} onClick={submitHandler}>
+                {t('verify')}
+              </Button>
+            </div>
           </div>
-        </div>
-      </Card>
-    </>
+        </Card>
+      </>
+    </Suspense>
   );
 }
