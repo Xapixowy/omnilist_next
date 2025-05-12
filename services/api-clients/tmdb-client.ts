@@ -10,6 +10,7 @@ import { CreateSessionResponse } from '@/types/responses/tmdb/create-session';
 import { CreateSessionWithLoginResponse } from '@/types/responses/tmdb/create-session-with-login';
 import { DeleteMovieRatingResponse } from '@/types/responses/tmdb/delete-movie-rating';
 import { DeleteTVShowRatingResponse } from '@/types/responses/tmdb/delete-tv-show-rating';
+import { EntertainmentObject } from '@/types/responses/tmdb/entertainment-object';
 import { GetAiringTodayTVShowsResponse } from '@/types/responses/tmdb/get-airing-today-tv-shows';
 import { GetFavoriteMoviesResponse } from '@/types/responses/tmdb/get-favorite-movies';
 import { GetFavoriteTVShowsResponse } from '@/types/responses/tmdb/get-favorite-tv-shows';
@@ -36,6 +37,7 @@ export class TmdbClient {
   private readonly apiKey: string = env.TMDB_API_KEY;
   private readonly accountId: string = env.TMDB_API_ACCOUNT_ID;
   private readonly baseUrl: string = 'https://api.themoviedb.org/3';
+  private readonly imageBaseUrl: string = 'https://image.tmdb.org/t/p';
 
   private constructor() {}
 
@@ -120,7 +122,7 @@ export class TmdbClient {
     page?: number;
     sortBy?: 'created_at.asc' | 'created_at.desc';
   }): Promise<GetFavoriteMoviesResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetFavoriteMoviesResponse>, AxiosError>(
       axios.get<GetFavoriteMoviesResponse>(`${this.baseUrl}/account/${this.accountId}/favorite/movies`, {
         params: {
           session_id: sessionId,
@@ -132,7 +134,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getFavoriteTVShows({
@@ -146,7 +155,7 @@ export class TmdbClient {
     page?: number;
     sortBy?: 'created_at.asc' | 'created_at.desc';
   }): Promise<GetFavoriteTVShowsResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetFavoriteTVShowsResponse>, AxiosError>(
       axios.get<GetFavoriteTVShowsResponse>(`${this.baseUrl}/account/${this.accountId}/favorite/tv`, {
         params: {
           session_id: sessionId,
@@ -158,7 +167,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async addFavorite({
@@ -203,7 +219,7 @@ export class TmdbClient {
     page?: number;
     sortBy?: 'created_at.asc' | 'created_at.desc';
   }): Promise<GetMoviesWatchlistResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetMoviesWatchlistResponse>, AxiosError>(
       axios.get<GetMoviesWatchlistResponse>(`${this.baseUrl}/account/${this.accountId}/watchlist/movies`, {
         params: {
           session_id: sessionId,
@@ -215,7 +231,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getTVShowsWatchlist({
@@ -229,7 +252,7 @@ export class TmdbClient {
     page?: number;
     sortBy?: 'created_at.asc' | 'created_at.desc';
   }): Promise<GetTVShowsWatchlistResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetTVShowsWatchlistResponse>, AxiosError>(
       axios.get<GetTVShowsWatchlistResponse>(`${this.baseUrl}/account/${this.accountId}/watchlist/tv`, {
         params: {
           session_id: sessionId,
@@ -241,7 +264,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async addToWatchlist({
@@ -286,7 +316,7 @@ export class TmdbClient {
     page?: number;
     sortBy?: 'created_at.asc' | 'created_at.desc';
   }): Promise<GetRatedMoviesResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetRatedMoviesResponse>, AxiosError>(
       axios.get<GetRatedMoviesResponse>(`${this.baseUrl}/account/${this.accountId}/rated/movies`, {
         params: {
           session_id: sessionId,
@@ -298,7 +328,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getRatedTVShows({
@@ -312,7 +349,7 @@ export class TmdbClient {
     page?: number;
     sortBy?: 'created_at.asc' | 'created_at.desc';
   }): Promise<GetRatedTVShowsResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetRatedTVShowsResponse>, AxiosError>(
       axios.get<GetRatedTVShowsResponse>(`${this.baseUrl}/account/${this.accountId}/rated/tv`, {
         params: {
           session_id: sessionId,
@@ -324,7 +361,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async addMovieRating({
@@ -436,7 +480,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<SearchMovieResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<SearchMovieResponse>, AxiosError>(
       axios.get<SearchMovieResponse>(`${this.baseUrl}/search/movie`, {
         params: {
           query,
@@ -451,7 +495,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async searchTVShow({
@@ -469,7 +520,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<SearchTVShowResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<SearchTVShowResponse>, AxiosError>(
       axios.get<SearchTVShowResponse>(`${this.baseUrl}/search/tv`, {
         params: {
           query,
@@ -483,7 +534,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async getNowPlayingMovies({
@@ -495,7 +553,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetNowPlayingMoviesResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetNowPlayingMoviesResponse>, AxiosError>(
       axios.get<GetNowPlayingMoviesResponse>(`${this.baseUrl}/movie/now_playing`, {
         params: {
           region,
@@ -506,7 +564,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getAiringTodayTVShows({
@@ -518,7 +583,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetAiringTodayTVShowsResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetAiringTodayTVShowsResponse>, AxiosError>(
       axios.get<GetAiringTodayTVShowsResponse>(`${this.baseUrl}/tv/airing_today`, {
         params: {
           timezone,
@@ -529,7 +594,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async getPopularMovies({
@@ -541,7 +613,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetPopularMoviesResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetPopularMoviesResponse>, AxiosError>(
       axios.get<GetPopularMoviesResponse>(`${this.baseUrl}/movie/popular`, {
         params: {
           region,
@@ -552,7 +624,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getPopularTVShows({
@@ -562,7 +641,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetPopularTVShowsResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetPopularTVShowsResponse>, AxiosError>(
       axios.get<GetPopularTVShowsResponse>(`${this.baseUrl}/tv/popular`, {
         params: {
           language,
@@ -572,7 +651,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async getUpcomingMovies({
@@ -584,7 +670,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetUpcomingMoviesResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetUpcomingMoviesResponse>, AxiosError>(
       axios.get<GetUpcomingMoviesResponse>(`${this.baseUrl}/movie/upcoming`, {
         params: {
           region,
@@ -595,7 +681,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getOnTheAirTVShows({
@@ -607,7 +700,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetOnTheAirTVShowsResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetOnTheAirTVShowsResponse>, AxiosError>(
       axios.get<GetOnTheAirTVShowsResponse>(`${this.baseUrl}/tv/on_the_air`, {
         params: {
           timezone,
@@ -618,7 +711,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async getTrendingMovies({
@@ -630,7 +730,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetTrendingMoviesResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetTrendingMoviesResponse>, AxiosError>(
       axios.get<GetTrendingMoviesResponse>(`${this.baseUrl}/trending/movie/${timeWindow}`, {
         params: {
           language,
@@ -640,7 +740,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((movie) => this.appendUrlToPaths(movie)),
+    };
   }
 
   async getTrendingTVShows({
@@ -652,7 +759,7 @@ export class TmdbClient {
     language?: Language;
     page?: number;
   }): Promise<GetTrendingTVShowsResponse | null> {
-    const response = await tryCatch<AxiosResponse, AxiosError>(
+    const response = await tryCatch<AxiosResponse<GetTrendingTVShowsResponse>, AxiosError>(
       axios.get<GetTrendingTVShowsResponse>(`${this.baseUrl}/trending/tv/${timeWindow}`, {
         params: {
           language,
@@ -662,7 +769,14 @@ export class TmdbClient {
       }),
     );
 
-    return !response.error ? response.data.data : null;
+    if (response.error) {
+      return null;
+    }
+
+    return {
+      ...response.data.data,
+      results: response.data.data.results.map((tvShow) => this.appendUrlToPaths(tvShow)),
+    };
   }
 
   async getMovieGenres({ language = Language.EN }: { language?: Language }): Promise<GetMovieGenresResponse | null> {
@@ -689,5 +803,28 @@ export class TmdbClient {
     );
 
     return !response.error ? response.data.data : null;
+  }
+
+  private appendUrlToPaths<T extends EntertainmentObject>(
+    object: T,
+    options: {
+      backdropSize?: 'w300' | 'w780' | 'w1280' | 'original';
+      posterSize?: 'w92' | 'w154' | 'w185' | 'w342' | 'w500' | 'w780' | 'original';
+    } = {
+      backdropSize: 'w1280',
+      posterSize: 'w342',
+    },
+  ): T {
+    const { backdrop_path, poster_path } = object;
+    const { backdropSize, posterSize } = options;
+
+    const backdropUrl = backdrop_path ? `${this.imageBaseUrl}/${backdropSize}${backdrop_path}` : undefined;
+    const posterUrl = backdrop_path ? `${this.imageBaseUrl}/${posterSize}${poster_path}` : undefined;
+
+    return {
+      ...object,
+      backdrop_path: backdropUrl,
+      poster_path: posterUrl,
+    };
   }
 }
