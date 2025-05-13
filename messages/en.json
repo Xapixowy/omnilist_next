@@ -18,7 +18,7 @@
     "discord_presence": {
       "online": "Online",
       "idle": "Idle",
-      "doNotDisturb": "Do Not Disturb",
+      "do_not_disturb": "Do Not Disturb",
       "offline": "Offline"
     }
   },
