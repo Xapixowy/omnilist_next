@@ -8,6 +8,7 @@ import { NavigationSection } from '../_features/header/types/navigation-section'
 
 export const LAYOUT_CONFIG: {
   navigationItems: (NavigationItem | NavigationSection)[];
+  navigationAuthItems: NavigationItem[];
   footerNavigationSections: FooterNavigationSectionProps[];
   socialLinks: SocialMediaLinkProps[];
   discord: {
@@ -35,6 +36,8 @@ export const LAYOUT_CONFIG: {
       ],
       shownIfLoggedIn: true,
     },
+  ],
+  navigationAuthItems: [
     {
       title: 'login',
       href: `/${ROUTES_CONFIG.auth}/${ROUTES_CONFIG.authRoutes.login}`,

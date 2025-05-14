@@ -12,8 +12,8 @@ export default function Navigation({ className = '' }: NavigationProps) {
   const navigationItems = useNavigationItems();
 
   return (
-    <nav>
-      <ul className={cn('flex flex-col sm:flex-row sm:items-center sm:justify-end sm:gap-6', className)}>
+    <nav className='w-full flex-1'>
+      <ul className={cn('flex flex-col sm:flex-row sm:items-center sm:gap-6', className)}>
         {navigationItems.map((item, index) => (
           <li className='border-t last:border-b border-zinc-600 sm:border-none' key={index}>
             {isNavigationItem(item) ? <NavigationItem {...item} /> : <NavigationSection {...item} />}

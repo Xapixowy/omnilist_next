@@ -34,7 +34,11 @@
       "sign_up": "Sign Up",
       "logout": "Logout",
       "all_rights_reserved": "All rights reserved.",
-      "something_went_wrong_please_try_again": "Something went wrong. Please try again"
+      "something_went_wrong_please_try_again": "Something went wrong. Please try again",
+      "search": "Search",
+      "search-movies-and-tv-shows-and-more": "Search movies, TV shows, and more...",
+      "show-more-results": "Show more results",
+      "entertainment_object_image": "Entertainment object image"
     },
     "auth": {
       "abstract_background_with_color_blur": "Abstract background with color blur"

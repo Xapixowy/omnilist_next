@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 
 const HEADING_CLASSES: Record<HeadingVariant, string> = {
   display: 'text-5xl lg:text-6xl font-bold',
+  p: 'text-base font-normal',
   h1: 'text-4xl lg:text-5xl font-semibold',
   h2: 'text-3xl font-semibold',
   h3: 'text-2xl font-semibold',
@@ -11,7 +12,7 @@ const HEADING_CLASSES: Record<HeadingVariant, string> = {
   h6: 'text-base font-semibold',
 };
 
-export type HeadingVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'display';
+export type HeadingVariant = 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'display';
 export type HeadingProps = {
   variant: HeadingVariant;
   style?: HeadingVariant;
@@ -23,6 +24,8 @@ export default function Heading({ variant, style, className = '', children }: He
   const classes = cn('scroll-m-20 tracking-tight', HEADING_CLASSES[style ?? variant], className);
 
   switch (variant) {
+    case 'p':
+      return <p className={classes}>{children}</p>;
     case 'h6':
       return <h6 className={classes}>{children}</h6>;
     case 'h5':

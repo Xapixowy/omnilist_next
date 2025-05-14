@@ -5,14 +5,11 @@
 }
 
 .background-pattern-dots {
-  background-image:
-    radial-gradient(var(--color-zinc-200) 2px, transparent 2px),
+  background-image: radial-gradient(var(--color-zinc-200) 2px, transparent 2px),
     radial-gradient(var(--color-zinc-50) 1px, transparent 1px);
   background-size: 4rem 4rem;
   opacity: 0.2;
-  background-position:
-    0 0,
-    2rem 2rem;
+  background-position: 0 0, 2rem 2rem;
 }
 
 .animate-show-up {

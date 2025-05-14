@@ -1,5 +1,6 @@
 import { APP_CONFIG } from '@/configs/app';
 import { cn } from '@/functions/cn';
+import ReactQueryProvider from '@/providers/react-query-provider';
 import '@/styles/index.css';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
@@ -18,7 +19,11 @@ const geistMono = Geist_Mono({
 });
 
 const Providers = ({ children }: { children: ReactNode }) => {
-  return <NextIntlClientProvider>{children}</NextIntlClientProvider>;
+  return (
+    <NextIntlClientProvider>
+      <ReactQueryProvider>{children}</ReactQueryProvider>
+    </NextIntlClientProvider>
+  );
 };
 
 export const metadata: Metadata = {
@@ -44,7 +49,7 @@ export default function RootLayout({
       )}
       lang='en'
     >
-      <body className={cn('overflow-x-hidden min-h-screen')}>
+      <body className='min-h-screen overflow-x-hidden max-w-screen'>
         <Providers>{children}</Providers>
         <Toaster />
       </body>

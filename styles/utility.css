@@ -4,3 +4,8 @@
   animation-timing-function: linear;
   animation-fill-mode: both;
 }
+
+@utility scroll-mask-top-* {
+  mask-image: linear-gradient(to top, black --value([ *]), transparent);
+  -webkit-mask-image: linear-gradient(to top, black --value([ *]), transparent);
+}

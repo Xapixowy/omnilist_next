@@ -3,8 +3,10 @@
 import MaxWidthWrapper from '@/components/layout/max-width-wrapper';
 import { cn } from '@/functions/cn';
 import { ReactNode, useEffect, useState } from 'react';
+import SearchBarButton from '../search-bar/_components/search-bar-button';
 import MobileDrawer from './components/mobile-drawer';
 import Navigation from './components/navigation';
+import NavigationAuthButtons from './components/navigation-auth-buttons';
 import NavigationBrandLink from './components/navigation-brand-link';
 import NavigationHamburger from './components/navigation-hamburger';
 import { HeaderMobileDrawerProvider } from './contexts/header-mobile-drawer';
@@ -28,13 +30,15 @@ export default function Header() {
   return (
     <Providers>
       <header
-        className={cn('sticky top-0 h-20 bg-transparent z-999', {
+        className={cn('sticky top-0 w-full h-20 bg-transparent z-999', {
           'bg-zinc-950/80': !isHeaderOnTop,
         })}
       >
-        <MaxWidthWrapper className='flex h-20 items-center justify-between gap-8 px-8'>
+        <MaxWidthWrapper className='flex h-20 items-center gap-8 px-8'>
           <NavigationBrandLink />
           <Navigation className='hidden sm:flex' />
+          <SearchBarButton className='hidden sm:flex' />
+          <NavigationAuthButtons className='hidden sm:flex' />
           <NavigationHamburger />
         </MaxWidthWrapper>
       </header>

@@ -1,5 +1,5 @@
 import { cn } from '@/functions/cn';
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes } from 'react';
 
 const INPUT_CLASSES = {
   default:
@@ -17,17 +17,18 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
 };
 
-const Input = ({ className = '', ...props }: InputProps) => {
-  return (
-    <input
-      className={cn(
-        INPUT_CLASSES.default,
-        INPUT_CLASSES.types[(props.type as AvailableInputTypes) ?? 'text'] ?? '',
-        className,
-      )}
-      {...props}
-    />
-  );
-};
+const Input = forwardRef<HTMLInputElement, InputProps>(({ className = '', ...props }, ref) => (
+  <input
+    ref={ref}
+    className={cn(
+      INPUT_CLASSES.default,
+      INPUT_CLASSES.types[(props.type as AvailableInputTypes) ?? 'text'] ?? '',
+      className,
+    )}
+    {...props}
+  />
+));
+
+Input.displayName = 'Input';
 
 export default Input;
