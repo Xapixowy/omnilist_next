@@ -38,7 +38,8 @@
       "search": "Search",
       "search-movies-and-tv-shows-and-more": "Search movies, TV shows, and more...",
       "show-more-results": "Show more results",
-      "entertainment_object_image": "Entertainment object image"
+      "entertainment_object_image": "Entertainment object image",
+      "no_results_found": "No results found"
     },
     "auth": {
       "abstract_background_with_color_blur": "Abstract background with color blur"

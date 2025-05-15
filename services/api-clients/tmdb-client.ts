@@ -819,7 +819,7 @@ export class TmdbClient {
     const { backdropSize, posterSize } = options;
 
     const backdropUrl = backdrop_path ? `${this.imageBaseUrl}/${backdropSize}${backdrop_path}` : undefined;
-    const posterUrl = backdrop_path ? `${this.imageBaseUrl}/${posterSize}${poster_path}` : undefined;
+    const posterUrl = poster_path ? `${this.imageBaseUrl}/${posterSize}${poster_path}` : undefined;
 
     return {
       ...object,

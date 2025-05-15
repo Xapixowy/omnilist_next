@@ -1,4 +1,5 @@
-import { BasePaginatedResponse } from './base-paginated-response';
-import { TVShow } from './tv-show';
+import { Genre } from './genre';
 
-export type GetTVShowGenresResponse = BasePaginatedResponse<TVShow>;
+export type GetTVShowGenresResponse = {
+  genres: Genre[];
+};

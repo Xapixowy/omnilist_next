@@ -3,27 +3,49 @@
 import MaxWidthWrapper from '@/components/layout/max-width-wrapper';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
+import { ROUTES_CONFIG } from '@/configs/routes';
 import { cn } from '@/functions/cn';
 import { MOVIES_AND_TV_SHOWS_API } from '@/hooks/api/movies-and-tv-shows-api';
 import { useDebounce } from '@/hooks/use-debounce';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { TbSearch, TbX } from 'react-icons/tb';
-import { transformSearchResponseMoviesToSearchBarEntertainmentObjectCardProps } from '../_functions/transform-search-response-to-search-bar-entertainment-object-card-props';
+import {
+  transformSearchResponseMoviesToSearchBarEntertainmentObjectCardProps,
+  transformSearchResponseTVShowsToSearchBarEntertainmentObjectCardProps,
+} from '../_functions/transform-search-response-to-search-bar-entertainment-object-card-props';
 import { useSearchBarContext } from '../_hooks/use-search-bar';
-import SearchBarEntertainmentSection from './search-bar-entertainment-section';
+import SearchBarEntertainmentObjectCard from './search-bar-entertainment-object-card';
 
 export const QUERY_DEBOUNCE_DELAY = 500;
 
 export default function SearchBarModal() {
+  const router = useRouter();
   const t = useTranslations('layouts.home');
   const { isOpen, setIsOpen } = useSearchBarContext();
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [query, setQuery] = useState<string>('');
   const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY);
-  const { data: moviesAndTVShowsData } = MOVIES_AND_TV_SHOWS_API.movies.useSearch(debouncedQuery);
-  const { data: tvShowsData } = MOVIES_AND_TV_SHOWS_API.tvShows.useSearch(debouncedQuery);
+  const { data: moviesGenresData } = MOVIES_AND_TV_SHOWS_API.movies.useGenres();
+  const { data: tvShowsGenresData } = MOVIES_AND_TV_SHOWS_API.tvShows.useGenres();
+  const { data: moviesSearchData } = MOVIES_AND_TV_SHOWS_API.movies.useSearch(debouncedQuery);
+  const { data: tvShowsSearchData } = MOVIES_AND_TV_SHOWS_API.tvShows.useSearch(debouncedQuery);
+
+  const getSearchItems = () => {
+    const movies = transformSearchResponseMoviesToSearchBarEntertainmentObjectCardProps({
+      items: moviesSearchData?.data?.results ?? [],
+      genres: moviesGenresData?.data?.genres ?? [],
+    });
+
+    const tvShows = transformSearchResponseTVShowsToSearchBarEntertainmentObjectCardProps({
+      items: tvShowsSearchData?.data?.results ?? [],
+      genres: tvShowsGenresData?.data?.genres ?? [],
+    });
+
+    return [...movies, ...tvShows].sort((a, b) => b.popularity - a.popularity);
+  };
 
   useEffect(() => {
     if (isOpen) {
@@ -60,17 +82,17 @@ export default function SearchBarModal() {
             </button>
           </div>
         </header>
-        <main className='flex-1 flex flex-col gap-5 items-center overflow-y-auto p-5'>
-          <SearchBarEntertainmentSection
-            items={
-              moviesAndTVShowsData?.data
-                ? transformSearchResponseMoviesToSearchBarEntertainmentObjectCardProps(
-                    moviesAndTVShowsData.data.results,
-                  )
-                : []
-            }
-          />
-          <Button variant='secondary' size='large'>
+        <main className='flex-1 flex flex-col gap-10 items-center overflow-y-auto p-5'>
+          <div className='flex gap-16 flex-wrap justify-center'>
+            {getSearchItems().length > 0
+              ? getSearchItems().map((item, index) => <SearchBarEntertainmentObjectCard key={index} {...item} />)
+              : t('no_results_found')}
+          </div>
+          <Button
+            variant='secondary'
+            size='large'
+            onClick={() => router.push(`/${ROUTES_CONFIG.search}?query=${query}`)}
+          >
             {t('show-more-results')}
           </Button>
         </main>

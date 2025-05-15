@@ -2,6 +2,7 @@ export const ROUTES_CONFIG = {
   default: '/',
 
   uiTester: 'ui-tester',
+  search: 'search',
 
   about: 'about',
   aboutRoutes: {

@@ -18,7 +18,7 @@ export const useSearchBarContext = () => {
 };
 
 export const SearchBarProvider = ({ children }: { children: ReactNode }) => {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return <SearchBarContext.Provider value={{ isOpen, setIsOpen }}>{children}</SearchBarContext.Provider>;
 };

@@ -115,23 +115,20 @@ const Button = ({
   disabled = false,
   className = '',
   children,
-  ...rest
+  ...props
 }: ButtonProps) => {
   const classes = cn(
     BUTTON_CLASSES.default,
-    variant !== 'default' ? BUTTON_CLASSES.variants[variant] : '',
-    size !== 'medium' ? BUTTON_CLASSES.sizes[size] : '',
-    rounded ? BUTTON_CLASSES.rounded : '',
+    variant !== 'default' && BUTTON_CLASSES.variants[variant],
+    size !== 'medium' && BUTTON_CLASSES.sizes[size],
+    rounded && BUTTON_CLASSES.rounded,
     className,
   );
 
   return (
-    <button {...rest} className={classes} disabled={loading || disabled} {...rest}>
+    <button className={classes} disabled={loading || disabled} {...props}>
       <span
-        className={cn(
-          BUTTON_TITLE_CLASSES.default,
-          variant !== 'default' ? BUTTON_TITLE_CLASSES.variants[variant] : '',
-        )}
+        className={cn(BUTTON_TITLE_CLASSES.default, variant !== 'default' && BUTTON_TITLE_CLASSES.variants[variant])}
       >
         {loading && <Loader size={size} isPrimary={variant === 'primary'} />} {children}
       </span>
