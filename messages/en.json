@@ -134,6 +134,22 @@
       "you_have_successfully_verified_your_account": "You have successfully verified your account",
       "you_are_almost_there_tap_the_button_below_to_complete_your_verification": "You're almost there! Tap the button below to complete your verification",
       "your_verification_link_will_expire_on": "Your verification link will expire on"
+    },
+    "search": {
+      "tabs": {
+        "all": "All",
+        "movies": "Movies",
+        "tv_shows": "TV Shows"
+      },
+      "filters": {
+        "yes": "Yes",
+        "no": "No",
+        "for_adults": "For Adults",
+        "release_year": "Release Year",
+        "primary_release_year": "Primary Release Year",
+        "first_air_date_year": "First Air Date Year"
+      },
+      "search_movies_tv_shows_and_more": "Search movies, TV shows, and more..."
     }
   }
 }

@@ -91,7 +91,7 @@ export default function SearchBarModal() {
           <Button
             variant='secondary'
             size='large'
-            onClick={() => router.push(`/${ROUTES_CONFIG.search}?query=${query}`)}
+            onClick={() => router.push(query ? `/${ROUTES_CONFIG.search}?query=${query}` : `/${ROUTES_CONFIG.search}`)}
           >
             {t('show-more-results')}
           </Button>
