@@ -6,7 +6,7 @@ import Footer from './_components/layout/footer';
 import { LAYOUT_CONFIG } from './_configs/layout-config';
 import Header from './_features/header/header';
 import SearchBarModal from './_features/search-bar/_components/search-bar-modal';
-import { SearchBarProvider } from './_features/search-bar/_hooks/use-search-bar';
+import { SearchBarProvider } from './_features/search-bar/_contexts/use-search-bar';
 
 type HomeLayoutProps = {
   children: ReactNode;

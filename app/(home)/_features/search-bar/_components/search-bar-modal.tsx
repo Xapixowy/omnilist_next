@@ -3,6 +3,7 @@
 import MaxWidthWrapper from '@/components/layout/max-width-wrapper';
 import Button from '@/components/ui/button';
 import Input from '@/components/ui/input';
+import Loader from '@/components/ui/loader';
 import { ROUTES_CONFIG } from '@/configs/routes';
 import { cn } from '@/functions/cn';
 import { MOVIES_AND_TV_SHOWS_API } from '@/hooks/api/movies-and-tv-shows-api';
@@ -11,11 +12,11 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { TbSearch, TbX } from 'react-icons/tb';
+import { useSearchBarContext } from '../_contexts/use-search-bar';
 import {
   transformSearchResponseMoviesToSearchBarEntertainmentObjectCardProps,
   transformSearchResponseTVShowsToSearchBarEntertainmentObjectCardProps,
 } from '../_functions/transform-search-response-to-search-bar-entertainment-object-card-props';
-import { useSearchBarContext } from '../_hooks/use-search-bar';
 import SearchBarEntertainmentObjectCard from './search-bar-entertainment-object-card';
 
 export const QUERY_DEBOUNCE_DELAY = 500;
@@ -30,9 +31,12 @@ export default function SearchBarModal() {
   const debouncedQuery = useDebounce(query, QUERY_DEBOUNCE_DELAY);
   const { data: moviesGenresData } = MOVIES_AND_TV_SHOWS_API.movies.useGenres();
   const { data: tvShowsGenresData } = MOVIES_AND_TV_SHOWS_API.tvShows.useGenres();
-  const { data: moviesSearchData } = MOVIES_AND_TV_SHOWS_API.movies.useSearch(debouncedQuery);
-  const { data: tvShowsSearchData } = MOVIES_AND_TV_SHOWS_API.tvShows.useSearch(debouncedQuery);
+  const { data: moviesSearchData, isLoading: moviesSearchIsLoading } =
+    MOVIES_AND_TV_SHOWS_API.movies.useSearch(debouncedQuery);
+  const { data: tvShowsSearchData, isLoading: tvShowsSearchIsLoading } =
+    MOVIES_AND_TV_SHOWS_API.tvShows.useSearch(debouncedQuery);
 
+  const isDataLoading = moviesSearchIsLoading || tvShowsSearchIsLoading;
   const getSearchItems = () => {
     const movies = transformSearchResponseMoviesToSearchBarEntertainmentObjectCardProps({
       items: moviesSearchData?.data?.results ?? [],
@@ -83,11 +87,15 @@ export default function SearchBarModal() {
           </div>
         </header>
         <main className='flex-1 flex flex-col gap-10 items-center overflow-y-auto p-5'>
-          <div className='flex gap-16 flex-wrap justify-center'>
-            {getSearchItems().length > 0
-              ? getSearchItems().map((item, index) => <SearchBarEntertainmentObjectCard key={index} {...item} />)
-              : t('no_results_found')}
-          </div>
+          {isDataLoading ? (
+            <Loader />
+          ) : (
+            <div className='flex gap-16 flex-wrap justify-center'>
+              {getSearchItems().length > 0
+                ? getSearchItems().map((item, index) => <SearchBarEntertainmentObjectCard key={index} {...item} />)
+                : t('no_results_found')}
+            </div>
+          )}
           <Button
             variant='secondary'
             size='large'

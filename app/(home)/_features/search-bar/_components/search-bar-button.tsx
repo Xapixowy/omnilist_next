@@ -3,7 +3,7 @@
 import { cn } from '@/functions/cn';
 import { useTranslations } from 'next-intl';
 import { TbSearch } from 'react-icons/tb';
-import { useSearchBarContext } from '../_hooks/use-search-bar';
+import { useSearchBarContext } from '../_contexts/use-search-bar';
 
 type SearchBarButtonProps = {
   onClick?: () => void;
