@@ -9,13 +9,15 @@ type FilterPillsProps = {
 };
 
 export default function FilterPills({ className = '', ...props }: FilterPillsProps) {
-  const { chosenFilters, setFilter } = useFilters();
+  const { filters, setFilter } = useFilters();
+
+  const chosenFilters = filters.filter((filter) => filter.value !== null);
 
   const handleClick = (filter: string): (() => void) => {
     return () => setFilter(filter, null);
   };
 
-  if (chosenFilters.length === 0) {
+  if (filters.length === 0) {
     return null;
   }
 
@@ -24,7 +26,13 @@ export default function FilterPills({ className = '', ...props }: FilterPillsPro
       {chosenFilters
         .filter((filter) => filter.value !== null)
         .map((item, index) => (
-          <FilterPill key={index} {...item} clickHandler={handleClick(item.filter)} />
+          <FilterPill
+            key={index}
+            filter={item.filter}
+            name={item.name}
+            value={item.value}
+            clickHandler={handleClick(item.filter)}
+          />
         ))}
     </div>
   );

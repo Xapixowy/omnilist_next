@@ -10,7 +10,7 @@ type FilterPillProps = ChosenFilter & {
   className?: string;
 };
 
-export default function FilterPill({ name, filter, value, clickHandler, className = '', ...props }: FilterPillProps) {
+export default function FilterPill({ name, value, clickHandler, className = '', ...props }: FilterPillProps) {
   const t = useTranslations('pages.search.filters');
 
   const formattedValue = (): string => {

@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@/components/ui/button';
+import Checkbox from '@/components/ui/checkbox';
 import Heading from '@/components/ui/heading';
 import Input from '@/components/ui/input';
 import Label from '@/components/ui/label';
@@ -323,14 +324,15 @@ export default function UITesterPage() {
         <div className='flex flex-col gap-2'>
           <Label>Checkbox</Label>
           <div className='flex gap-2'>
-            <Input type='checkbox' id='checkbox1' />
-            <Input type='checkbox' id='checkbox2' />
+            <Checkbox id='checkbox1' />
+            <Checkbox id='checkbox2' checked />
+            <Checkbox id='checkbox3' checked disabled />
           </div>
         </div>
         <div className='flex flex-col gap-2'>
           <Label>Color</Label>
           <Input type='color' />
-          <Input type='color' disabled />
+          <Input type='color' checked disabled />
         </div>
       </div>
     </>

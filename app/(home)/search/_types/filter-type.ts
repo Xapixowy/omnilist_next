@@ -1,1 +1,1 @@
-export type FilterType = 'toggle' | 'select' | 'multi-select' | 'range' | 'slider';
+export type FilterType = 'checkbox' | 'select' | 'multi-select' | 'input-number' | 'range' | 'slider';

@@ -147,8 +147,11 @@
         "for_adults": "For Adults",
         "release_year": "Release Year",
         "primary_release_year": "Primary Release Year",
-        "first_air_date_year": "First Air Date Year"
+        "first_air_date_year": "First Air Date Year",
+        "year": "Year"
       },
+      "reset": "Reset",
+      "apply": "Apply",
       "search_movies_tv_shows_and_more": "Search movies, TV shows, and more..."
     }
   }

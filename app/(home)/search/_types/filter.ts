@@ -1,11 +1,17 @@
 import { FilterType } from './filter-type';
 
-type FilterToggle = {
-  type: 'toggle';
+type FilterCheckbox = {
+  type: 'checkbox';
   options?: {
     true: string;
     false: string;
   };
+};
+
+type FilterInputNumber = {
+  type: 'input-number';
+  min: number;
+  max: number;
 };
 
 type FilterSelect = {
@@ -36,5 +42,5 @@ export type Filter = {
   name: string;
   filter: string;
   type: FilterType;
-  value?: string;
-} & (FilterToggle | FilterSelect | FilterMultiSelect | FilterRange | FilterSlider);
+  value: string | null;
+} & (FilterCheckbox | FilterSelect | FilterInputNumber | FilterMultiSelect | FilterRange | FilterSlider);
